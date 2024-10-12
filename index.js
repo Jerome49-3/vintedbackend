@@ -11,6 +11,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY_SECRET);
 
 //***routes****//
 const signupRoutes = require("./routes/auth/signup.routes");
+const confirmEmail = require("./routes/auth/confirmEmail.routes");
 const loginRoutes = require("./routes/auth/login.routes");
 const offerPost = require("./routes/offer/offerPost.routes");
 const offerGet = require("./routes/offer/offerGet.routes");
@@ -26,6 +27,7 @@ const mypurchases = require("./routes/mypurchases/mypurchases.routes");
 //appel des routes//
 app.use(cors());
 app.use("/user", signupRoutes);
+app.use(confirmEmail);
 app.use("/user", loginRoutes);
 app.use(offerPost);
 app.use(offerGet);
