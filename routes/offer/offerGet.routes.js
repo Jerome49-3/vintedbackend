@@ -123,7 +123,12 @@ router.get("/offers", async (req, res) => {
         });
       }
       console.log("offers in /offers:", offers);
-      return res.status(200).json(offers);
+      return res
+        .status(200)
+        .json({
+          offers,
+          message: "welcome to my replica of the vinted website",
+        });
     }
   } catch (error) {
     console.log("error:", error, "\n", "error.message:", error.message);

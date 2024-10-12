@@ -46,7 +46,9 @@ cloudinary.config({
 });
 
 app.get("/", (req, res) => {
-  return res.status(200).json({ message: "Welcome" });
+  return res
+    .status(200)
+    .json({ message: "welcome to my replica of the vinted website" });
 });
 
 app.all("*", (req, res) => {
