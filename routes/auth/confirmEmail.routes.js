@@ -3,13 +3,7 @@ const router = express.Router();
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const Mailgun = require("mailgun.js");
-
-//config mailgun
-const mailgun = new Mailgun();
-const mgClient = mailgun.client({
-  username: process.env.MAILGUN_USERNAME,
-  key: process.env.MAILGUN_API_KEY,
-});
+const fileUpload = require("express-fileupload");
 
 router.post("/confirmEmail", fileUpload(), async (req, res) => {
   console.log("je suis sur la route /confirmEmail");
