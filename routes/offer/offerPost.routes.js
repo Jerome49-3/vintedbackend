@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Offer = require("../../models/Offer.js");
 const isAuthenticated = require("../../middleware/isAuthenticated.js");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
-const convertToBase64 = require("../../utils/convertToBase64.js");
+const convertToBase64 = require("../../utils/lib.js");
+
+//models
+const Offer = require("../../models/Offer.js");
 
 router.post(
   "/offer/publish",

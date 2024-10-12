@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/User");
 const uid2 = require("uid2");
 const { SHA256 } = require("crypto-js");
 const encBase64 = require("crypto-js/enc-base64");
@@ -19,6 +18,9 @@ const mgClient = mailgun.client({
   username: process.env.MAILGUN_USERNAME,
   key: process.env.MAILGUN_API_KEY,
 });
+
+//models
+const User = require("../../models/User");
 
 router.post("/signup", fileUpload(), async (req, res) => {
   console.log("je suis sur la route /signup");
@@ -102,10 +104,10 @@ router.post("/signup", fileUpload(), async (req, res) => {
               await newUser.save();
               const admin = `The negociator or The Tibo`;
               const subject = "Welcome to Vintaid, my replica of Vinted";
-              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/confirmEmail/${token}">Go to Vintaid</a>`;
+              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${token}">Go to Vintaid</a>`;
               const messageHtml = `
                   <p>Welcome ${username},</p>
-                  <p>Please click on this link to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/confirmEmail/${token}">Go to Vintaid</a> </p>
+                  <p>Please click on this link to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${token}">Go to Vintaid</a> </p>
                   <br>
                   <p>Best regards,</p>
                   <p><strong>${admin}, The Vintaid Administrator has never tord ^_^ </strong></p>`;

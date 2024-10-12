@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/User");
 const isAuthenticated = require("../../middleware/isAuthenticated.js");
 const moment = require("moment/moment.js");
+
+//models
+const User = require("../../models/User");
 
 router.get("/users", isAuthenticated, async (req, res) => {
   // console.log("req.user:", req.user);

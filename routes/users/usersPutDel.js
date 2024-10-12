@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const User = require("../../models/User");
 const isAuthenticated = require("../../middleware/isAuthenticated.js");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
-const convertToBase64 = require("../../utils/convertToBase64.js");
+const convertToBase64 = require("../../utils/lib.js");
 const { message } = require("statuses");
+
+//models
+const User = require("../../models/User");
 
 router.put("/users/:id", isAuthenticated, fileUpload(), async (req, res) => {
   // console.log("je suis sur la route PUT /users/:id");
