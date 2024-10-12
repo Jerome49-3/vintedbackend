@@ -28,6 +28,10 @@ const User = mongoose.model("User", {
     type: Boolean,
     default: false,
   },
+  emailIsConfirmed: {
+    type: Boolean,
+    default: false,
+  },
   date: {
     type: String,
   },

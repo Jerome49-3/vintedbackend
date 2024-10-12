@@ -10,6 +10,15 @@ const CryptoJS = require("crypto-js");
 // const bcrypt = require('bcrypt');
 // const saltRounds = 16;
 const jwt = require("jsonwebtoken");
+const Mailgun = require("mailgun.js");
+const formData = require("form-data");
+
+//config mailgun
+const mailgun = new Mailgun(formData);
+const mgClient = mailgun.client({
+  username: process.env.MAILGUN_USERNAME,
+  key: process.env.MAILGUN_API_KEY,
+});
 
 router.post("/signup", fileUpload(), async (req, res) => {
   console.log("je suis sur la route /signup");
@@ -55,7 +64,7 @@ router.post("/signup", fileUpload(), async (req, res) => {
           // si le hash, token different de null
           const date = moment().format("DD MMM YYYY");
           console.log("date in /users:", date);
-          if (hash !== null) {
+          if (hash !== null && hash !== undefined) {
             if (req.body !== undefined) {
               const newUser = new User({
                 email: email,
@@ -91,6 +100,27 @@ router.post("/signup", fileUpload(), async (req, res) => {
               console.log("newUser in /signup:", newUser);
               newUser.token = token;
               await newUser.save();
+              const admin = `The negociator or The Tibo`;
+              const subject = "Welcome to Vintaid, my replica of Vinted";
+              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/confirmEmail/${token}">Go to Vintaid</a>`;
+              const messageHtml = `
+                  <p>Welcome ${username},</p>
+                  <p>Please click on this link to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/confirmEmail/${token}">Go to Vintaid</a> </p>
+                  <br>
+                  <p>Best regards,</p>
+                  <p><strong>${admin}, The Vintaid Administrator has never tord ^_^ </strong></p>`;
+
+              const response = await mgClient.messages.create(
+                process.env.MAILGUN_SANDBOX,
+                {
+                  from: process.env.EMAIL_TO_ME,
+                  to: `${username} <${email}>`,
+                  subject: subject,
+                  text: message,
+                  html: messageHtml,
+                }
+              );
+              console.log("responseMailgun on /signup:", response);
               return res.status(200).json({ data: token });
             }
           } else {
