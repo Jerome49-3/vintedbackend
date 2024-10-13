@@ -7,7 +7,7 @@ const fileUpload = require("express-fileupload");
 //models
 const User = require("../../models/User");
 
-router.get("/confirmEmail/:code", fileUpload(), async (req, res) => {
+router.get("/confirmemail/:code", fileUpload(), async (req, res) => {
   console.log("je suis sur la route /confirmEmail");
   const code = req.params.code;
   if (code) {
