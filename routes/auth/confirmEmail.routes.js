@@ -7,13 +7,13 @@ const fileUpload = require("express-fileupload");
 //models
 const User = require("../../models/User");
 
-router.get("/confirmemail/:code", fileUpload(), async (req, res) => {
-  console.log("je suis sur la route /confirmEmail");
-  const code = req.params.code;
+router.get("/confirmemail/:id", fileUpload(), async (req, res) => {
+  console.log("je suis sur la route /confirmemail");
+  const code = req.params.id;
   if (code) {
     const user = await User.findOne({ code: code });
-    console.log("code in /confirmEmail:", code);
-    console.log("user in /confirmEmail:", user);
+    console.log("code in /confirmemail:", code);
+    console.log("user in /confirmemail:", user);
     if (user && code === user.code) {
       const token = jwt.sign(
         {
