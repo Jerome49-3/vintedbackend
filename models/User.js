@@ -32,6 +32,9 @@ const User = mongoose.model("User", {
     type: Boolean,
     default: false,
   },
+  code: {
+    type: String,
+  },
   date: {
     type: String,
   },

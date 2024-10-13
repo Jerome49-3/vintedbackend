@@ -11,6 +11,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const Mailgun = require("mailgun.js");
 const formData = require("form-data");
+const generateCode = require("../../utils/lib.js");
 
 //config mailgun
 const mailgun = new Mailgun(formData);
@@ -89,25 +90,21 @@ router.post("/signup", fileUpload(), async (req, res) => {
               //   JSON.stringify(userObj),
               //   process.env.SRV_KEY_SECRET
               // ).toString();
-              const token = jwt.sign(
-                {
-                  _id: newUser.id,
-                  account: newUser.account,
-                  isAdmin: newUser.isAdmin,
-                  newsletter: newUser.newsletter,
-                },
-                process.env.SRV_KEY_SECRET
-              );
-              console.log("token in /signup:", token);
+
+              // console.log("token in /signup:", token);
               console.log("newUser in /signup:", newUser);
-              newUser.token = token;
+              // newUser.token = token;
+              const code = generateCode(6);
+              console.log("code in /signup:", code);
+              console.log("typeof code in /signup:", typeof code);
+              newUser.code = code;
               await newUser.save();
               const admin = `The negociator or The Tibo`;
               const subject = "Welcome to Vintaid, my replica of Vinted";
-              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${token}">Go to Vintaid</a>`;
+              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${code}">Go to Vintaid</a>`;
               const messageHtml = `
                   <p>Welcome ${username},</p>
-                  <p>Please click on this link to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${token}">Go to Vintaid</a> </p>
+                  <p>Please click on this link to confirm your email: <a href="https://site--vintedbackend--s4qnmrl7fg46.code.run/user/confirmEmail/${code}">Go to Vintaid</a> </p>
                   <br>
                   <p>Best regards,</p>
                   <p><strong>${admin}, The Vintaid Administrator has never tord ^_^ </strong></p>`;
@@ -123,7 +120,9 @@ router.post("/signup", fileUpload(), async (req, res) => {
                 }
               );
               console.log("responseMailgun on /signup:", response);
-              return res.status(200).json({ data: token });
+              return res
+                .status(200)
+                .json({ data: "Veuillez confirmer votre email" });
             }
           } else {
             return res
