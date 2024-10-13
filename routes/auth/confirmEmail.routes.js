@@ -28,11 +28,11 @@ router.get("/confirmEmail/:code", fileUpload(), async (req, res) => {
       user.token = token;
       await user.save();
 
-      // Ajout du token dans le header
-      res.setHeader("Authorization", `Bearer ${token}`);
-
-      // Redirection vers la page "/publish"
-      return res.redirect(302, "/publish");
+      return res.status(200).json({
+        message:
+          "Merci votre email est bien confirmé, vous aller être redirigé vers la route /publish",
+        token,
+      });
     }
   } else {
     return res.status(400).json({ message: "Oups, somthing went wrong" });
