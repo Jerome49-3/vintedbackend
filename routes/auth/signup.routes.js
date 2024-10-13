@@ -101,10 +101,10 @@ router.post("/signup", fileUpload(), async (req, res) => {
               await newUser.save();
               const admin = `The negociator or The Tibo`;
               const subject = "Welcome to Vintaid, my replica of Vinted";
-              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://vintaid.netlify.app/confirmEmail/${code}">Go to Vintaid</a>`;
+              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://vintaid.netlify.app/confirmemail/${code}">Go to Vintaid</a>`;
               const messageHtml = `
                   <p>Welcome ${username},</p>
-                  <p>Please click on this link to confirm your email: <a href="https://vintaid.netlify.app/confirmEmail/${code}">Go to Vintaid</a> </p>
+                  <p>Please click on this link to confirm your email: <a href="https://vintaid.netlify.app/confirmemail/${code}">Go to Vintaid</a> </p>
                   <br>
                   <p>Best regards,</p>
                   <p><strong>${admin}, The Vintaid Administrator has never tord ^_^ </strong></p>`;
