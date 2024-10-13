@@ -122,7 +122,9 @@ router.post("/signup", fileUpload(), async (req, res) => {
               console.log("responseMailgun on /signup:", response);
               return res
                 .status(200)
-                .json({ data: "Veuillez confirmer votre email" });
+                .json({
+                  data: "Merci de confirmer votre email, en cliquant sur le lien recu, possiblement dans vos spams :)",
+                });
             }
           } else {
             return res
