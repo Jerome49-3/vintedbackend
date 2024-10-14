@@ -27,6 +27,7 @@ router.get("/users", isAuthenticated, async (req, res) => {
         date: el.date,
         isAdmin: el.isAdmin,
         id: el._id,
+        token: el.token,
       });
     }
     res.status(200).json(lastUsers);
