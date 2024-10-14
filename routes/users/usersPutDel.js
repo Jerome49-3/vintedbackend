@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 const convertToBase64 = require("../../utils/convertToBase64.js");
 const { message } = require("statuses");
+const jwt = require("jsonwebtoken");
 
 //models
 const User = require("../../models/User");
