@@ -1,9 +1,3 @@
-const convertToBase64 = (file) => {
-  return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
-};
-
-module.exports = convertToBase64;
-
 const decodeToken = (token) => {
   const base64Url = token.split(".")[0];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -18,13 +12,3 @@ const decodeToken = (token) => {
   return JSON.parse(jsonPayload);
 };
 module.exports = decodeToken;
-
-const generateCode = (length) => {
-  let code = "";
-  for (let i = 0; i < length; i++) {
-    // console.log("i on generateCode:", i);
-    code = code + Math.floor(Math.random() * 10);
-  }
-  return code;
-};
-module.exports = generateCode;

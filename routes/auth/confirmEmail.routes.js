@@ -34,7 +34,7 @@ router.post("/confirmemail", fileUpload(), async (req, res) => {
         return res.status(200).json({
           message:
             "Merci votre email est bien confirmé, vous aller être redirigé vers la route /publish",
-          token,
+          token: token,
         });
       }
     }

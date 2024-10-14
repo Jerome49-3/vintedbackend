@@ -11,7 +11,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const Mailgun = require("mailgun.js");
 const formData = require("form-data");
-const generateCode = require("../../utils/lib.js");
+const generateCode = require("../../utils/generateCode");
 
 //config mailgun
 const mailgun = new Mailgun(formData);
