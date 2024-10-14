@@ -101,10 +101,10 @@ router.post("/signup", fileUpload(), async (req, res) => {
               await newUser.save();
               const admin = `The negociator or The Tibo`;
               const subject = "Welcome to Vintaid, my replica of Vinted";
-              const message = `Welcome ${username}, please click on this url, to confirm your email: <a href="https://vintaid.netlify.app/confirmemail/${code}">Go to Vintaid</a>`;
+              const message = `Welcome ${username}, Here your code: ${code}, copy him and tape it at input for verifying your email, please`;
               const messageHtml = `
                   <p>Welcome ${username},</p>
-                  <p>Please click on this link to confirm your email: <a href="https://vintaid.netlify.app/confirmemail/${code}">Go to Vintaid</a> </p>
+                  <p>Welcome ${username}, Here your code: ${code}, copy him and tape it at input for verifying your email, please</p>
                   <br>
                   <p>Best regards,</p>
                   <p><strong>${admin}, The Vintaid Administrator has never tord ^_^ </strong></p>`;
@@ -121,7 +121,7 @@ router.post("/signup", fileUpload(), async (req, res) => {
               );
               console.log("responseMailgun on /signup:", response);
               return res.status(200).json({
-                data: "Merci de confirmer votre email, en cliquant sur le lien recu, possiblement dans vos spams :)",
+                data: "Merci de confirmer votre email, en entrant le code recu par mail, possiblement dans vos spams ^_^",
               });
             }
           } else {
