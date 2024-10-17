@@ -25,7 +25,7 @@ const mypurchases = require("./routes/mypurchases/mypurchases.routes");
 // const offerPutDel = require("./routes/offer/offerPutDel.routes");
 
 //appel des routes//
-app.use(cors());
+app.use(cors({ origin: "https://vintaid.netlify.app" }));
 app.use("/user", signupRoutes);
 app.use("/user", confirmEmail);
 app.use("/user", loginRoutes);
